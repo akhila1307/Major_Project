@@ -1,0 +1,542 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Lung Cancer Detection</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font- 
+awesome.min.css"> 
+<style> 
+body { 
+font-family: Arial, Helvetica, sans-serif; 
+} 
+.navbar 
+{ overflow: 
+hidden; 
+background-color: rgba(252, 17, 107, 0.74); 
+} 
+.navbar b 
+{ float:left ; 
+font-size: 16px; 
+color: white; 
+text-align: center; 
+padding: 10px 12px; 
+text-decoration: none; 
+} 
+.navbar a 
+{ float: right; 
+ font-size: 16px; 
+color: white; text-align: 
+center; padding: 14px 16px; 
+text-decoration: none; 
+} 
+.dropdown 
+{float: left; 
+overflow: hidden; 
+} 
+.dropdown .dropbtn 
+{font-size: 16px; 
+border: none; 
+outline: none; 
+color: white; 
+padding: 14px 16px; 
+background-color: inherit; 
+font-family: inherit; 
+margin: 0; 
+} 
+.navbar a:hover, .dropdown:hover .dropbtn 
+{background-color: rgb(56, 15, 238); 
+} 
+.dropdown-content 
+{display: none; 
+position: absolute; 
+background-color: #f9f9f9; 
+min-width: 160px; 
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+z-index: 1; 
+} 
+.dropdown-content a 
+{float: none; 
+color: black; 
+padding: 12px 16px; 
+text-decoration: none; 
+display: block; 
+text-align: left; 
+} 
+.dropdown-content a:hover 
+{background-color: #ddd; 
+} 
+.dropdown:hover .dropdown-content 
+{display: block; 
+} 
+input[type=text], select 
+{width: 100%; 
+padding: 12px 20px; 
+margin: 8px  0; 
+display: inline-block; 
+border: 1px solid #ccc; 
+border-radius: 4px; 
+box-sizing: border-box; 
+} 
+input[type=number], select 
+{width: 100%; 
+padding: 12px 20px; 
+margin: 8px  0; 
+display: inline-block; 
+border: 1px solid #ccc; 
+border-radius: 4px; 
+box-sizing: border-box; 
+} 
+.registerbtn { 
+background-color: #4CAF50; 
+color: white; 
+padding: 16px 20px; 
+margin: 8px 0; 
+border: none; cursor: 
+pointer; 
+width: 100%; 
+opacity: 0.9; 
+} 
+.registerbtn:hover 
+{opacity:1; 
+} 
+input[type=submit]:hover 
+{ background-color: #45a049; 
+} 
+.center 
+{ margin: 
+auto;width: 
+30%; 
+border: 3px solid #4d00dbc5; 
+padding: 10px; 
+} 
+</style> 
+</head> 
+<body> 
+    
+  <div class="navbar">
+    <b>LUNG CANCER DETECTION</b>
+    <a href="/">Prediction</a>
+    </div> 
+    
+  </div>
+  
+  <h2><p style="text-align:center;">Lung Cancer Detection</p></h2>
+    <div class="center">
+        <form action="/predict"method="post">
+            <label for="GENDER">GENDER</label>
+            <input type="number" id="GENDER" placeholder="Male:0, Female:1" name="GENDER" required  min="0" max="1" oninput="validateInput(this);">
+            
+            <br>
+            <label for="AGE">AGE</label>
+      <input type="number"     id="AGE" placeholder="AGE" name="AGE" required>
+          
+          <br>
+          <label for="SMOKING">SMOKING </label>
+       <input type="number"     id="SMOKING" placeholder="SMOKING(YES:1 , NO:0)" name="SMOKING" required min="0" max="1" oninput="validity.valid||(value='');">
+         
+          <br>
+    
+          <label for="ANXIETY">ANXIETY</label>
+          <input type="number"   id="ANXIETY" placeholder="ANXIETY(enter  YES:1 , NO:0)" name="ANXIETY" required min="0" max="1" oninput="validity.valid||(value='');">
+         <br>
+         <label for="PEER_PRESSURE">PEER_PRESSURE</label>
+      <input type="number"    id="PEER_PRESSURE" placeholder="PEER_PRESSURE(YES:1 , NO:0)" name="PEER_PRESSURE" required min="0" max="1" oninput="validity.valid||(value='');">
+          <br>
+          <label for="CHRONIC DISEASE">CHRONIC DISEASE</label>
+      <input type="number"   id="CHRONIC DISEASE" placeholder="CHRONIC DISEASE(YES:1 , NO:0)" name="CHRONIC DISEASE" required min="0" max="1" oninput="validity.valid||(value='');">
+         
+          <br>
+          <label for="FATIGUE">FATIGUE</label>
+      <input type="number"     id="FATIGUE" placeholder="FATIGUE(YES:1 , NO:0)" name="FATIGUE" required min="0" max="1" oninput="validity.valid||(value='');">
+         
+          <br>
+          <label for="ALLERGY">ALLERGY</label>
+      <input type="number"     id="ALLERGY" placeholder="ALLERGY(YES:1 , NO:0)" name="ALLERGY" required min="0" max="1" oninput="validity.valid||(value='');">
+          <br>
+          <label for="WHEEZING">WHEEZING</label>
+          <input type="number"     id="WHEEZING" placeholder="WHEEZING(YES:1, NO:0)" name="WHEEZING" required min="0" max="1" oninput="validity.valid||(value='');">
+      <br>
+      <label for="ALCHOL CONSUMING">ALCHOL CONSUMING</label>
+       <input type="number"   id="ALCHOL CONSUMING" placeholder="ALCHOL CONSUMING(YES:1 , NO:0)" name="ALCHOL CONSUMING" required min="0" max="1" oninput="validity.valid||(value='');">
+            <br>
+            <label for="COUGHING">COUGHING</label>
+      <input type="number"     id="COUGHING" placeholder="COUGHING(YES:1 , NO:0)" name="COUGHING" required min="0" max="1" oninput="validity.valid||(value='');">
+      <br>
+      <label for="SHORTNESS OF BREATH">SHORTNESS OF BREATH</label>
+       <input type="number"   id="SHORTNESS OF BREATH" placeholder="SHORTNESS OF BREATH(YES:1 , NO:0)" name="SHORTNESS OF BREATH" required min="0" max="1" oninput="validity.valid||(value='');">
+         <br>
+         <label for="SWALLOWING DIFFICULTY">SWALLOWING DIFFICULTY</label>
+             <input type="number"   id="SWALLOWING DIFFICULTY" placeholder="SWALLOWING DIFFICULTY(YES:1, NO:0)" name="SWALLOWING DIFFICULTY" required min="0" max="1" oninput="validity.valid||(value='');">
+             <br>
+             <label for="CHEST PAIN">CHEST PAIN</label>
+         <input type="number"    id="CHEST PAIN" placeholder="CHEST PAIN(YES:1 , NO:0)" name="CHEST PAIN" required min="0" max="1" oninput="validity.valid||(value='');">
+      <br>
+      <button type="submit" class="registerbtn">Predict</button>
+      </form>
+      </div> 
+</body> 
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Lung Cancer Detection</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font- 
+awesome.min.css"> 
+<style> 
+body { 
+font-family: Arial, Helvetica, sans-serif; 
+} 
+.navbar 
+{ overflow: 
+hidden; 
+background-color: rgba(252, 17, 107, 0.74); 
+} 
+.navbar b 
+{ float:left ; 
+font-size: 16px; 
+color: white; 
+text-align: center; 
+padding: 10px 12px; 
+text-decoration: none; 
+} 
+.navbar a 
+{ float: right; font- 
+size: 16px; color: 
+white; text-align: 
+center; padding: 14px 
+16px; text- 
+decoration: none; 
+} 
+.dropdown 
+{float: left; 
+overflow: hidden; 
+} 
+.dropdown .dropbtn 
+{font-size: 16px; 
+border: none; 
+outline: none; 
+color: white; 
+padding: 14px 16px; 
+background-color: inherit; 
+font-family: inherit; 
+margin: 0; 
+} 
+.navbar a:hover, .dropdown:hover .dropbtn 
+{background-color: rgb(56, 15, 238); 
+} 
+.dropdown-content 
+{display: none; 
+position: absolute; 
+background-color: #f9f9f9; 
+min-width: 160px; 
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+z-index: 1; 
+} 
+.dropdown-content a 
+{float: none; 
+color: black; 
+padding: 12px 16px; 
+text-decoration: none; 
+display: block; 
+text-align: left; 
+} 
+.dropdown-content a:hover 
+{background-color: #ddd; 
+} 
+.dropdown:hover .dropdown-content 
+{display: block; 
+} 
+input[type=text], select 
+{width: 100%; 
+padding: 12px 20px; 
+margin: 8px  0; 
+display: inline-block; 
+border: 1px solid #ccc; 
+border-radius: 4px; 
+box-sizing: border-box; 
+} 
+input[type=number], select 
+{width: 100%; 
+padding: 12px 20px; 
+margin: 8px  0; 
+display: inline-block; 
+border: 1px solid #ccc; 
+border-radius: 4px; 
+box-sizing: border-box; 
+} 
+.registerbtn { 
+background-color: #4CAF50; 
+color: white; 
+padding: 16px 20px; 
+margin: 8px 0; 
+border: none; cursor: 
+pointer; 
+width: 100%; 
+opacity: 0.9; 
+} 
+.registerbtn:hover 
+{opacity:1; 
+} 
+input[type=submit]:hover 
+{ background- 
+color: #45a049; 
+} 
+.center 
+{ margin: 
+auto;width: 
+60%; 
+border: 3px solid #4d00dbc5; 
+padding: 10px; 
+} 
+</style> 
+</head> 
+<body> 
+<div class="navbar"> 
+<b>LUNG CANCER DETECTION</b>
+<!--<a href="/">Prediction</a> 
+<a href="/">Home</a
+</div> 
+</div> 
+<h2><p style="text-align:center;">Lung Cancer Detection</p></h2> 
+<div class="center"> 
+<form action="/predict"method="post"> 
+<p>GENDER<input type="number" id="GENDER" placeholder="GENDER(Male:0, Female:1)" name="GENDER" 
+required> </p>
+<br> 
+<input type="number" id="AGE" placeholder="AGE" name="AGE" required> 
+<br> 
+<input type="number" id="SMOKING" placeholder="SMOKING(YES:1 , NO:0)" 
+name="YELLOW_FINGERS" required> 
+<br> 
+<input type="number" id="ANXIETY" placeholder="ANXIETY(enter YES:1 , NO:0)" 
+name="ANXIETY" required> 
+<br> 
+<input type="number" id="PEER_PRESSURE" placeholder="PEER_PRESSURE(YES:1 , NO:0)" 
+name="PEER_PRESSURE" required> 
+<br> 
+<input type="number" id="CHRONIC DISEASE" placeholder="CHRONIC DISEASE(YES:1 , 
+NO:0)" name="CHRONIC DISEASE" required> 
+<br> 
+<input type="number" id="FATIGUE" placeholder="FATIGUE(YES:1, NO:0)" name="FATIGUE" 
+required> 
+<br> 
+<input type="number" id="ALLERGY" placeholder="ALLERGY(YES:1, NO:0)" name="ALLERGY" 
+required> 
+<br> 
+<input type="number" id="WHEEZING" placeholder="WHEEZING(YES:1, NO:0)" 
+name="WHEEZING" required> 
+<br> 
+<input type="number" id="ALCHOL CONSUMING" placeholder="ALCHOL CONSUMING(YES:1, 
+NO:0)" name="ALCHOL CONSUMING" required> 
+<br> 
+<input type="number" id="COUGHING" placeholder="COUGHING(YES:1, NO:0)" name="COUGHING" 
+required> 
+<br> 
+<input type="number" id="SHORTNESS OF BREATH" placeholder="SHORTNESS OF BREATH(YES:1, 
+NO:0)" name="SHORTNESS OF BREATH" required> 
+<br> 
+<input type="number" id="SWALLOWING DIFFICULTY" placeholder="SWALLOWING 
+DIFFICULTY(YES:2 , NO:1)" name="SWALLOWING DIFFICULTY" required> 
+<br> 
+<input type="number" id="CHEST PAIN" placeholder="CHEST PAIN(YES:1, NO:0)" name="CHEST 
+PAIN" required> 
+<br> 
+<input name=""  type="submit"  value="Predict" >
+
+<input name="" type="reset" onclick="myFunction()" value="Clear" >
+</form> 
+</div> 
+</body> 
+</html>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<head>
+    <title>Lung Cancer Prediction App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='style.css') }}">
+<body>
+
+        <h1>LUNG CANCEER Prediction</h1>
+
+        <form action="{{ url_for('predict') }}" method="post">
+
+            <p> Gender </p>
+            <input type="number"  placeholder="(MALE:0 , FEMALE:1)" 
+              name="GENDER" required> 
+        
+              <p>AGE</p>
+              <input type="number"  placeholder="AGE" name="AGE" required> 
+              <p>SMOKING</p>
+              <input type="number"  placeholder="(YES:1 , NO:0)" 
+              name="ANXIETY" required> 
+              <p>ANXIETY</p>
+              <input type="number"  placeholder="(YES:1 , NO:0)" 
+              name="ANXIETY" required> 
+              <p>PEER_PRESSURE</p> 
+              <input type="number"  placeholder="(YES:1 , NO:0)" 
+              name="PEER_PRESSURE" required> 
+              <p>CHRONIC_DISEASE</p>
+              <input type="number"  placeholder="(YES:1 ,NO:0)" 
+              name="CHRONIC DISEASE" required> 
+              <p> FATIGUE</p>
+              <input type="number"  placeholder="(YES:1 , NO:0)" name="FATIGUE" 
+              required> 
+              <p> ALLERGY</p>
+              <input type="number" placeholder="(YES:1, NO:0)" name="ALLERGY" 
+              required> 
+              <p>WHEEZING</p> 
+              <input type="number" placeholder="(YES:1, NO:0)" 
+              name="WHEEZING" required> 
+              <p>ALCHOL_CONSUMING</p> 
+              <input type="number"  placeholder="(YES:1 ,NO:0)" name="ALCHOL CONSUMING" required> 
+              <p>COUGHING</p> 
+              <input type="number"  placeholder="(YES:1 , NO:0)" name="COUGHING" 
+              required> 
+              <p>SHORTNESS_OF_BREATH</p> 
+              <input type="number"  placeholder="(YES:1 , 
+              NO:0)" name="SHORTNESS OF BREATH" required> 
+              <p>SWALLOWING_DIFFICULTY</p> 
+              <input type="number"  placeholder="(YES:1 , NO:0)" name="SWALLOWING DIFFICULTY" required> 
+              <p>CHEST_PAIN</p> 
+              <input type="number" placeholder="(YES:1 , NO:0)" name="CHEST 
+              PAIN" required>
+             <br>
+
+            <input name=""  type="submit"  value="Predict" >
+
+            <input name="" type="reset" onclick="myFunction()" value="Clear" >
+            
+            <script src="C:\Users\SADARUWAN\PycharmProjects\Calories Prediction Webapp\static\script.js">
+
+            </script>
+        </form>
+</body>
+</head>
+</html>-->
